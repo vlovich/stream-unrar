@@ -73,7 +73,8 @@ Stream unrar homepage : http://www.gnu.org/software/liquidwar6/
 #include <vector>
 #include <cassert>
 
-#include "unrar.h"
+//#include "unrar.h"
+#include "rar.hpp"
 
 #ifdef WINDOWS
 #define PATH_SEP '\\'
