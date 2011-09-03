@@ -1,3 +1,11 @@
+Allows monitoring within specific directories or specifying the first part of a multi-part archive explicitly.  This program supports the "rar, r00, r01..." and "part01.rar, part02.rar..." naming schemes.
+
+If a part of the multi-part archive is missing, then it will silently wait until the part becomes available, and then continue extraction.
+
+This is really only useful if you can ensure that each part of the archive is non-corrupt as it becomes available on the filesystem (e.g. Usenet)
+
+This is a free, open-source, and more importantly cross-platform alternative to a feature found in NZBPlayer.  It is designed to be combined with binary newsgroup readers (i.e. HellaNZB, NZBGet) and media players (i.e. VLC, MPlayer).
+
 Introduction
 Stream unrar allows you to begin extraction of non-corrupt multi-part archives that are (in the most common use) being downloaded from newsgroups (Usenet). This is particularly useful with videos which tend to take longer to download in full, but for which it is usually possible
 
