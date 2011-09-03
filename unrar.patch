@@ -1,0 +1,72 @@
+*** unrar/dll.hpp	2007-09-10 04:49:28.000000000 -0700
+--- unrar.h	2008-01-17 16:49:31.000000000 -0800
+***************
+*** 33,38 ****
+--- 33,42 ----
+  #define LONG long
+  #define HANDLE void *
+  #define UINT unsigned int
++ #define DLLIMPORT extern
++ #else
++ // Windows
++ #define DLLIMPORT __declspec(dllimport)
+  #endif
+  
+  struct RARHeaderData
+***************
+*** 109,115 ****
+    UCM_CHANGEVOLUME,UCM_PROCESSDATA,UCM_NEEDPASSWORD
+  };
+  
+! typedef int (CALLBACK *UNRARCALLBACK)(UINT msg,LONG UserData,LONG P1,LONG P2);
+  
+  typedef int (PASCAL *CHANGEVOLPROC)(char *ArcName,int Mode);
+  typedef int (PASCAL *PROCESSDATAPROC)(unsigned char *Addr,int Size);
+--- 113,119 ----
+    UCM_CHANGEVOLUME,UCM_PROCESSDATA,UCM_NEEDPASSWORD
+  };
+  
+! typedef int (CALLBACK *UNRARCALLBACK)(UINT msg,void * UserData,size_t P1,size_t P2);
+  
+  typedef int (PASCAL *CHANGEVOLPROC)(char *ArcName,int Mode);
+  typedef int (PASCAL *PROCESSDATAPROC)(unsigned char *Addr,int Size);
+***************
+*** 118,135 ****
+  extern "C" {
+  #endif
+  
+! HANDLE PASCAL RAROpenArchive(struct RAROpenArchiveData *ArchiveData);
+! HANDLE PASCAL RAROpenArchiveEx(struct RAROpenArchiveDataEx *ArchiveData);
+! int    PASCAL RARCloseArchive(HANDLE hArcData);
+! int    PASCAL RARReadHeader(HANDLE hArcData,struct RARHeaderData *HeaderData);
+! int    PASCAL RARReadHeaderEx(HANDLE hArcData,struct RARHeaderDataEx *HeaderData);
+! int    PASCAL RARProcessFile(HANDLE hArcData,int Operation,char *DestPath,char *DestName);
+! int    PASCAL RARProcessFileW(HANDLE hArcData,int Operation,wchar_t *DestPath,wchar_t *DestName);
+! void   PASCAL RARSetCallback(HANDLE hArcData,UNRARCALLBACK Callback,LONG UserData);
+! void   PASCAL RARSetChangeVolProc(HANDLE hArcData,CHANGEVOLPROC ChangeVolProc);
+! void   PASCAL RARSetProcessDataProc(HANDLE hArcData,PROCESSDATAPROC ProcessDataProc);
+! void   PASCAL RARSetPassword(HANDLE hArcData,char *Password);
+! int    PASCAL RARGetDllVersion();
+  
+  #ifdef __cplusplus
+  }
+--- 122,140 ----
+  extern "C" {
+  #endif
+  
+! DLLIMPORT HANDLE PASCAL RAROpenArchive(struct RAROpenArchiveData *ArchiveData);
+! 
+! DLLIMPORT HANDLE PASCAL RAROpenArchiveEx(struct RAROpenArchiveDataEx *ArchiveData);
+! DLLIMPORT int    PASCAL RARCloseArchive(HANDLE hArcData);
+! DLLIMPORT int    PASCAL RARReadHeader(HANDLE hArcData,struct RARHeaderData *HeaderData);
+! DLLIMPORT int    PASCAL RARReadHeaderEx(HANDLE hArcData,struct RARHeaderDataEx *HeaderData);
+! DLLIMPORT int    PASCAL RARProcessFile(HANDLE hArcData,int Operation,char *DestPath,char *DestName);
+! DLLIMPORT int    PASCAL RARProcessFileW(HANDLE hArcData,int Operation,wchar_t *DestPath,wchar_t *DestName);
+! DLLIMPORT void   PASCAL RARSetCallback(HANDLE hArcData,UNRARCALLBACK Callback,void * UserData);
+! DLLIMPORT void   PASCAL RARSetChangeVolProc(HANDLE hArcData,CHANGEVOLPROC ChangeVolProc);
+! DLLIMPORT void   PASCAL RARSetProcessDataProc(HANDLE hArcData,PROCESSDATAPROC ProcessDataProc);
+! DLLIMPORT void   PASCAL RARSetPassword(HANDLE hArcData,char *Password);
+! DLLIMPORT int    PASCAL RARGetDllVersion();
+  
+  #ifdef __cplusplus
+  }
