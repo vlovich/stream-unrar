@@ -40,7 +40,7 @@ Stream unrar homepage : http://www.gnu.org/software/liquidwar6/
 #define LINUX
 #endif
 
-#ifdef LINUX
+#if defined(LINUX) || defined(_UNIX)
 
 /* LINUX */
 
@@ -117,7 +117,7 @@ void setPriority(_priority level)
 	}
 #ifdef WINDOWS
 	SetThreadPriority(GetCurrentThread(), priority);
-#elif defined(LINUX)
+#else
 	setpriority(PRIO_PROCESS, getpid(), priority);
 #endif
 }
@@ -196,7 +196,8 @@ struct MultipartInfo
 		bytes_processed;
 };
 
-int CALLBACK missing_file(UINT msg,void * UserData, size_t P1, size_t P2)
+
+int CALLBACK missing_file(UINT msg, LPARAM UserData, LPARAM P1, LPARAM P2)
 {
 	//fprintf(stderr, "Callback %u\n", msg);
 	switch(msg)
@@ -434,7 +435,7 @@ void extract(const std::string & archive_name, const std::string & dest_dir, con
 
 	MultipartInfo info;
 	//fprintf(stdout, "Setting callback\n");
-	RARSetCallback(archive, &missing_file, &info);
+	RARSetCallback(archive, &missing_file, (ssize_t)&info);
 
 	//fprintf(stdout, "Starting to process file\n");
 
