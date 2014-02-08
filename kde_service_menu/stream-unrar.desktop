@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+Encoding=UTF-8
+ServiceTypes=KonqPopupMenu/Plugin,application/x-rar
+Icon=utilities-file-archiver
+Actions=StreamUnrar;
+
+[Desktop Action StreamUnrar]
+Name=Extract while downloading
+Icon=utilities-file-archiver
+Exec=konsole --title "stream-unrar" -e stream-unrar -a %f -d "$(dirname %f)"

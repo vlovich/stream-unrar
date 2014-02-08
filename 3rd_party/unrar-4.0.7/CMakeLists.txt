@@ -51,4 +51,3 @@ list(APPEND UNRAR_SRC
 	#unios2.cpp
 
 add_library(unrar SHARED ${UNRAR_SRC} ${UNRAR_PLATFORM_SRC})
-add_definitions(-DRARDLL)

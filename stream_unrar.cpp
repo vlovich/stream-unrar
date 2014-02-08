@@ -122,6 +122,15 @@ void setPriority(_priority level)
 #endif
 }
 
+void thread_sleep(int amountInSeconds)
+{
+#ifdef WINDOWS
+	Sleep(amountInSeconds * 1000);
+#else
+	sleep(amountInSeconds);
+#endif
+}
+
 bool getPathInfo(const char * name, fileInfo & info)
 {
 	// we don't handle symbolic links as destinations
@@ -208,18 +217,11 @@ int CALLBACK missing_file(UINT msg, LPARAM UserData, LPARAM P1, LPARAM P2)
 				fprintf(stderr, "Waiting for %s\n", (char*)P1);
 				while (!fileExists((char*)P1))
 				{
-#ifdef WINDOWS
-					Sleep(4000);
-#else
-					sleep(4);
-#endif
+					thread_sleep(4);
 				}
-				
-#ifdef WINDOWS
-					Sleep(3000);
-#else
-					sleep(3);
-#endif
+
+				thread_sleep(3);
+
 				fprintf(stderr, "%s found\n", (char*)P1);
 			}
 			break;
@@ -660,15 +662,6 @@ bool process(const std::string & dir, bool recurse, const std::string & dest_dir
 	return abort;
 }
 
-void thread_sleep(int amountInSeconds)
-{
-#ifdef WINDOWS
-	Sleep(amountInSeconds * 1000);
-#else
-	sleep(amountInSeconds);
-#endif
-}
-
 int main(int argc, char ** argv)
 {
 /*	OpenArchive roa;
@@ -723,7 +716,7 @@ int main(int argc, char ** argv)
 			if (process(*dir, recurseMonitor, extract_dir))
 				return 0;
 		}
-		thread_sleep(0);
+		thread_sleep(1);
 	}
 	return -1;
 }
