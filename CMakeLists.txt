@@ -1,6 +1,8 @@
 project(stream-unrar)
 cmake_minimum_required(VERSION 2.8)
 
+set(CMAKE_CXX_STANDARD 11)
+
 add_definitions(-DRARDLL)
 
 add_subdirectory(3rd_party)
