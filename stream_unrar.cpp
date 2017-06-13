@@ -63,6 +63,7 @@ Stream unrar homepage : http://www.gnu.org/software/liquidwar6/
 #define LOWEST_PRIORITY THREAD_PRIORITY_IDLE
 #define NORMAL_PRIORITY THREAD_PRIORITY_NORMAL
 #define HIGH_PRIORITY THREAD_PRIORITY_HIGHEST
+#define ssize_t long
 
 #endif
 
