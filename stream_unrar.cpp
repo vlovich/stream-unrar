@@ -141,6 +141,9 @@ bool getPathInfo(const char * name, fileInfo & info)
 #ifdef WINDOWS
 	struct __stat64 buf;
 	result = _stat64(name, &buf);
+#elif __LP64__
+	struct stat buf;
+	result = stat(name, &buf);
 #else
 	struct stat64 buf;
 	result = stat64(name, &buf);
