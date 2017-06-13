@@ -60,9 +60,11 @@ Stream unrar homepage : http://www.gnu.org/software/liquidwar6/
 #include <windows.h>
 #include <direct.h>
 #include <intrin.h>
+#include <BaseTsd.h>
 #define LOWEST_PRIORITY THREAD_PRIORITY_IDLE
 #define NORMAL_PRIORITY THREAD_PRIORITY_NORMAL
 #define HIGH_PRIORITY THREAD_PRIORITY_HIGHEST
+typedef SSIZE_T ssize_t;
 
 #endif
 
