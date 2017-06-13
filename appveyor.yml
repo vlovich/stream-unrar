@@ -1,0 +1,9 @@
+platform: x64
+configuration: Release
+os: Visual Studio 2015
+before_build:
+  - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX="%P" -DCMAKE_BUILD_TYPE=Release
+
+build:
+  project: stream-unrar.vcxproj
+  parallel: true

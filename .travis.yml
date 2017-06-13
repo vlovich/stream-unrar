@@ -1,0 +1,35 @@
+language: cpp
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - george-edison55-precise-backports
+          packages:
+            - cmake-data
+            - cmake
+            - g++-6
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+    - os: osx
+      osx_image: xcode8.3
+      env:
+        - MATRIX_EVAL=""
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - cmake . -DCMAKE_BUILD_TYPE=Release
+  - make
