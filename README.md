@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/6wuhiw66etu5h4h9/branch/master?svg=true)](https://ci.appveyor.com/project/vlovich/stream-unrar/branch/master)
+[![Build Status](https://travis-ci.org/vlovich/stream-unrar.svg?branch=master)](https://travis-ci.org/vlovich/stream-unrar)
+
 Allows monitoring within specific directories or specifying the first part of a multi-part archive explicitly.  This program supports the "rar, r00, r01..." and "part01.rar, part02.rar..." naming schemes.
 
 If a part of the multi-part archive is missing, then it will silently wait until the part becomes available, and then continue extraction.
